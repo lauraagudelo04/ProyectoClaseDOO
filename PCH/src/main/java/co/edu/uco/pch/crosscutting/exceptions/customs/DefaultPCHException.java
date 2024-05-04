@@ -8,12 +8,12 @@ public final class DefaultPCHException extends PCHException{
 	private static final long serialVersionUID = -3662331984905572117L;
 
 	public DefaultPCHException(final String mensajeUsuario , Lugar lugar) {
-		super(mensajeUsuario, Lugar.DATA);
+		super(mensajeUsuario, Lugar.DEFAULT);
 	}
 	
-	public DefaultPCHException(String mensajeTecnico,String mensajeUsuario, 
-			Lugar lugar, Throwable exceptionRaiz) {
-		super(mensajeTecnico,mensajeUsuario, lugar, exceptionRaiz);
+	public DefaultPCHException(final String mensajeTecnico,final String mensajeUsuario, 
+			final Throwable exceptionRaiz) {
+		super(mensajeTecnico,mensajeUsuario, Lugar.DEFAULT, exceptionRaiz);
 	}
 	
 	

@@ -18,10 +18,16 @@ public class PCHException extends RuntimeException{
 	}
 	
 	public PCHException(final String mensajeUsuario, Lugar lugar) {
-			super(mensajeUsuario,new Exception());
+			super(mensajeUsuario);
 			setMensajeUsuario(mensajeUsuario);
 			setLugar(lugar);
 		}
+	
+	public PCHException(String mensajeTecnico, String mensajeUsuario, Lugar lugar ) {
+		super(mensajeUsuario);
+		setMensajeUsuario(mensajeUsuario);
+		setLugar(lugar);
+	}
 
 	private final void setMensajeUsuario(final String mensajeUsuario) {
 		this.mensajeUsuario =TextHelper.applyTrim(mensajeUsuario);

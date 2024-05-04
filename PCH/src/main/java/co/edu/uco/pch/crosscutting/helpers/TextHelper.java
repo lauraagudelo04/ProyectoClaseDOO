@@ -3,6 +3,7 @@ package co.edu.uco.pch.crosscutting.helpers;
 public final class TextHelper {
 	
 	public static final String EMPTY="";
+	public static final String UNDERLINE="_";
 		
 	private TextHelper() {
 		super();
@@ -28,4 +29,17 @@ public final class TextHelper {
 		return getDefaultValue(string).trim();
 	}
 	
+	//Los tres puntos son argumentos variables y se manda como ultimo parametro del metodo
+	//Inferencia de tipos
+	public static final String concatenate(final String...strings) {
+		final var sb= new StringBuilder(EMPTY);
+		
+		if (!ObjectHelper.getObjectHelper().isNull(strings)) {
+			for (final var string : strings) {
+				sb.append(applyTrim(string));
+			}
+		}
+		
+		return sb.toString();
+	}
 }
