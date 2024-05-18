@@ -2,7 +2,6 @@ package co.edu.uco.pch.crosscutting.helpers;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
 import co.edu.uco.pch.crosscutting.exceptions.customs.CrossCuttingPCHException;
 import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
 import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
