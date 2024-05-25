@@ -1,10 +1,9 @@
 package co.edu.uco.pch.business.assembler.entity.impl;
 
-import co.edu.uco.pch.business.assembler.dto.AssemblerDTO;
-import co.edu.uco.pch.business.assembler.dto.impl.PaisAssemblerDTO;
+import java.util.List;
+
 import co.edu.uco.pch.business.assembler.entity.AssemblerEntity;
 import co.edu.uco.pch.business.domain.PaisDomain;
-import co.edu.uco.pch.dto.PaisDTO;
 import co.edu.uco.pch.entity.PaisEntity;
 
 public class PaisAssemblerEntity implements AssemblerEntity<PaisDomain, PaisEntity>{
@@ -28,6 +27,12 @@ public class PaisAssemblerEntity implements AssemblerEntity<PaisDomain, PaisEnti
 
 	@Override
 	public PaisEntity toEntity(PaisDomain domain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PaisDomain> toDomainCollection(List<PaisEntity> entityCollection) {
 		// TODO Auto-generated method stub
 		return null;
 	}

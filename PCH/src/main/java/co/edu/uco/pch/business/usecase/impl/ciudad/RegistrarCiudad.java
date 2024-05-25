@@ -29,7 +29,7 @@ public final class RegistrarCiudad implements UseCaseWithoutReturn<CiudadDomain>
         // 1. Validar que los casos de uso sean correctos a nivel de tipo de dato, longitutd, obligateriodidad, formato, rango, etc...
         // 2. Validar que no exista otra ciudad con el mismo nombre para el mismo departamento
         validarCiudadMismoNombreMismoDepartamento(data.getNombre(), data.getDepartamento().getId());
-
+        UUID idCiudad= generarIdentificadorCiudad();
         // 3. Validar que no exista otra ciudad con el mismo identificador
         var ciudadEntity = CiudadEntity.build().setId(generarIdentificadorCiudad()).setNombre
                         (data.getNombre()).setDepartamento(DepartamentoAssemblerEntity.
@@ -61,7 +61,6 @@ public final class RegistrarCiudad implements UseCaseWithoutReturn<CiudadDomain>
         if (!resultados.isEmpty()){
             var mensajeUsuario= "Ya existe una ciudad con el nombre \"${1}\" asociado con " ;
             throw new BusinessPCHException(mensajeUsuario);
-
         }
     }
 }

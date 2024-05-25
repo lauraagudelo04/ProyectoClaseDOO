@@ -11,7 +11,7 @@ public final class ObjectHelper {
 		return INSTANCE;
 	}
 	
-	public <O> boolean isNull( O objeto) {
+	public  <O> boolean isNull( O objeto) {
 		return objeto==null;
 	}
 	

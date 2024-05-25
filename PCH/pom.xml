@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.2.5</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>co.edu.uco.pch</groupId>
 	<artifactId>pch-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>PCH</name>
-	<description>Componenete que ofrece los servicios para la palicacion de historia de manteimiento de computadores a traves de servicios REST que finalmente son apalancados por otras capas de negocio y acceso a datos</description>
+	<description>Componente que ofrece los servicios para la aplicación de
+		historia de mantenimiento de computadoras, a través de servicios REST
+		que finalmente son apalancados por otras capas de negocio y acceso a
+		datos</description>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
@@ -27,6 +31,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>

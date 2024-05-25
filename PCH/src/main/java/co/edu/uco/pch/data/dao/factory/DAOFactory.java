@@ -7,11 +7,9 @@ import co.edu.uco.pch.data.dao.factory.concrete.AzureSQLDAOFactory;
 
 public interface DAOFactory {
 
-	default AzureSQLDAOFactory getFactory() {
+	static DAOFactory getFactory() {
 		return new AzureSQLDAOFactory();
 	}
-
-	void abrirConexion();
 
 	void cerrarConexion();
 

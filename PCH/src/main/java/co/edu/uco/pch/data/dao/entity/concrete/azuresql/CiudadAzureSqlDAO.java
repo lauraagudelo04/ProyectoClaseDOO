@@ -56,27 +56,30 @@ public class CiudadAzureSqlDAO extends SqlConnection implements CiudadDAO {
 
 	@Override
 	public List<CiudadEntity> consultar(CiudadEntity data) {
+	    
 	    final StringBuilder sentenciaSql = new StringBuilder();
 	    sentenciaSql.append("SELECT id, nombre, departamento FROM Ciudad WHERE 1=1");
 
 	    final List<Object> parametros = new ArrayList<>();
 
-	    if (!ObjectHelper.getObjectHelper().isNull(data.getId())) {
-	        sentenciaSql.append(" AND id = ?");
-	        parametros.add(data.getId());
+	    if (data != null) {
+	        if (!ObjectHelper.getObjectHelper().isNull(data.getId())) {
+	            sentenciaSql.append(" AND id = ?");
+	            parametros.add(data.getId());
+	        }
+	        if (!TextHelper.isNullOrEmpty(data.getNombre())) {
+	            sentenciaSql.append(" AND nombre = ?");
+	            parametros.add(data.getNombre());
+	        }
+	        if (data.getDepartamento() != null && !ObjectHelper.getObjectHelper().isNull(data.getDepartamento().getId())) {
+	            sentenciaSql.append(" AND departamento = ?");
+	            parametros.add(data.getDepartamento().getId());
+	        }
 	    }
-	    if (!TextHelper.isNullOrEmpty(data.getNombre())) {
-	        sentenciaSql.append(" AND nombre = ?");
-	        parametros.add(data.getNombre());
-	    }
-	    if (!ObjectHelper.getObjectHelper().isNull(data.getDepartamento()) && !ObjectHelper.getObjectHelper().isNull(data.getDepartamento().getId())) {
-	        sentenciaSql.append(" AND departamento = ?");
-	        parametros.add(data.getDepartamento().getId());
-	    }
+
 	    final List<CiudadEntity> ciudades = new ArrayList<>();
 
-	    try (final PreparedStatement sentenciaSqlPreparada = getConexion()
-	            .prepareStatement(sentenciaSql.toString())) {
+	    try (final PreparedStatement sentenciaSqlPreparada = getConexion().prepareStatement(sentenciaSql.toString())) {
 
 	        for (int i = 0; i < parametros.size(); i++) {
 	            sentenciaSqlPreparada.setObject(i + 1, parametros.get(i));
@@ -85,15 +88,15 @@ public class CiudadAzureSqlDAO extends SqlConnection implements CiudadDAO {
 	        try (final ResultSet resultado = sentenciaSqlPreparada.executeQuery()) {
 	            while (resultado.next()) {
 	                CiudadEntity ciudad = new CiudadEntity();
-	                ciudad.setId((UUID) resultado.getObject("id"));
+	                ciudad.setId(UUID.fromString(resultado.getString("id"))); // Convertir String a UUID
 	                ciudad.setNombre(resultado.getString("nombre"));
 	                DepartamentoEntity departamento = new DepartamentoEntity();
-	                departamento.setId((UUID) resultado.getObject("departamento"));
+	                departamento.setId(UUID.fromString(resultado.getString("departamento"))); // Convertir String a UUID
 	                ciudad.setDepartamento(departamento);
 	                ciudades.add(ciudad);
 	            }
 	        }
-	        
+
 	    } catch (final SQLException excepcion) {
 	        var mensajeUsuario = "Se ha presentado un problema tratando de consultar las ciudades. Por favor, contacte al administrador del sistema.";
 	        var mensajeTecnico = "Se ha presentado una SQLException tratando de realizar la consulta de las ciudades en la tabla \"Ciudad\" de la base de datos Azure SQL.";
@@ -107,38 +110,7 @@ public class CiudadAzureSqlDAO extends SqlConnection implements CiudadDAO {
 	        throw new DataPCHException(mensajeUsuario, mensajeTecnico, excepcion);
 	    }
 
-
-
-		return ciudades;
-	}
-
-	@Override
-	public void eliminar(UUID id) {
-		final StringBuilder sentenciaSQL = new StringBuilder();
-		
-		sentenciaSQL.append("DELETE FROM Ciudad WHERE id = ?");
-		
-		try (final PreparedStatement sentenciaSQLPreparada = getConexion().prepareStatement(sentenciaSQL.toString())){
-			sentenciaSQLPreparada.setObject(1, id);
-			
-			sentenciaSQLPreparada.executeUpdate();
-		}catch(final SQLException excepcion) {
-			var mensajeUsuario = "se ha presentado un prblemao tratando de eliminar la ciudad \"${1}\" y si el problemas contacte a el administrador ...";
-			var mensajeTecnico = "Se ha presentado una excepcion se tipo SQLexception tatando de realizar el delete de la ciudad \\\"${1}\\\" en la tabla pais\"\r\n"
-					+ "					+ \"de la base de datos azureSql.para mas detalles revise de forma completa la excepcionRaiz presentada";
-			throw new DataPCHException(mensajeTecnico, mensajeUsuario);
-			
-		}catch(final Exception excepcion) {
-			var mensajeUsuario = "\"se ha presentado un prblema tratando de eliminar la ciudad \\\"${1}\\\" y si el problemas contacte a el administrador ...\"";
-			var mensajeTecnico = "Se ha presentado una excepcion se tipo SQLexception tatando de realizar el delete de la ciudad \"${1}\" en la tabla pais"
-					+ "de la base de datos azureSql.para mas detalles revise de forma completa la excepcionRaiz presentada ";
-			throw new DataPCHException(mensajeTecnico, mensajeUsuario);
-		}
-		
-		
-			
-			
-		
+	    return ciudades;
 	}
 
 	@Override
@@ -147,8 +119,6 @@ public class CiudadAzureSqlDAO extends SqlConnection implements CiudadDAO {
 		
 		sentenciaSQL.append("UPDATE Ciudad SET nombre= ?,departamento= ? WHERE id= ?");
 
-	
-		
 		try (final PreparedStatement sentenciaSQLPreparada = getConexion().prepareStatement(sentenciaSQL.toString())){
 			sentenciaSQLPreparada.setObject(3,data.getId() );
 			sentenciaSQLPreparada.setString(1, data.getNombre());

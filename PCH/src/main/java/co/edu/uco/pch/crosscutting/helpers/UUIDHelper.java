@@ -1,33 +1,32 @@
 package co.edu.uco.pch.crosscutting.helpers;
-import java.util.Random;
+
 import java.util.UUID;
 
-import org.springframework.boot.context.properties.bind.DefaultValue;
+public final class UUIDHelper {
 
-public class UUIDHelper {
+	private static final String DEFAULT_UUID_STRING = "00000000-0000-0000-0000-000000000000";
 
-	public static final String DEFAULT_UUID_STRING = "00000000-0000-0000-000000000000";
-	
 	private UUIDHelper() {
 		super();
 	}
-	
-	public static final UUID convertToUUID(final String uuidASString) {
-		return UUID.fromString(uuidASString);
+
+	public static final UUID convertToUUID(final String uuidAsString) {
+		return UUID.fromString(uuidAsString);
 	}
-	
-	public static final UUID getDefault (final UUID value, final UUID defaultValue) {
+
+	public static final UUID getDefault(final UUID value, final UUID defaultValue) {
 		return ObjectHelper.getObjectHelper().getDefaultValue(value, defaultValue);
 	}
+
 	public static final UUID getDefault() {
 		return convertToUUID(DEFAULT_UUID_STRING);
 	}
-	public static UUID generate() {
-        return UUID.randomUUID();
-    }
-	
-	public static UUID convertirStringaUUID(String uuidString) {
-            return UUID.fromString(uuidString);        
-    }
-	
+
+	public static final UUID generate() {
+		return UUID.randomUUID();
+	}
+
+	public static final boolean isDefault(final UUID value) {
+		return getDefault(value, getDefault()).equals(getDefault());
+	}
 }
