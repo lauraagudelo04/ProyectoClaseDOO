@@ -16,6 +16,7 @@ public final class RegistrarCiudad implements UseCaseWithoutReturn<CiudadDomain>
     private DAOFactory factory;
 
     public RegistrarCiudad(final DAOFactory factory){
+    	
         if(ObjectHelper.getObjectHelper().isNull(factory)){
             var mensajeUsuario = "Se ha presentado un porblema tratando de llevar a cabo el registro de una ciudad";
             var mensajeTecnico = "El DAOFactory para crear la ciudad llego nulo...";
@@ -29,7 +30,6 @@ public final class RegistrarCiudad implements UseCaseWithoutReturn<CiudadDomain>
         // 1. Validar que los casos de uso sean correctos a nivel de tipo de dato, longitutd, obligateriodidad, formato, rango, etc...
         // 2. Validar que no exista otra ciudad con el mismo nombre para el mismo departamento
         validarCiudadMismoNombreMismoDepartamento(data.getNombre(), data.getDepartamento().getId());
-        UUID idCiudad= generarIdentificadorCiudad();
         // 3. Validar que no exista otra ciudad con el mismo identificador
         var ciudadEntity = CiudadEntity.build().setId(generarIdentificadorCiudad()).setNombre
                         (data.getNombre()).setDepartamento(DepartamentoAssemblerEntity.
@@ -41,6 +41,7 @@ public final class RegistrarCiudad implements UseCaseWithoutReturn<CiudadDomain>
 
     private final UUID generarIdentificadorCiudad(){
         UUID id = UUIDHelper.generate();
+        
         boolean existeId = true;
 
         while(existeId){

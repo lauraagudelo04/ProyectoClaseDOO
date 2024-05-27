@@ -26,7 +26,6 @@ public class ConsultarCiudades implements UseCaseWithReturn <CiudadDomain, List<
     public List<CiudadDomain> execute(CiudadDomain data) {
     	var ciudadEntityFilter=CiudadAssemblerEntity.getInstance().toEntity(data);
     	var resultadosEntity= factory.getCiudadDAO().consultar(ciudadEntityFilter);
-    	var resultadosDomain= CiudadAssemblerEntity.getInstance().toDomainCollection(resultadosEntity);
-        return CiudadAssemblerEntity.getInstance().toDomainCollection(null);
+        return CiudadAssemblerEntity.getInstance().toDomainCollection(resultadosEntity);
     }
 }

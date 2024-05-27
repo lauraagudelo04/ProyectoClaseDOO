@@ -82,4 +82,39 @@ public final class AzureSQLDAOFactory extends SqlConnection implements DAOFactor
 	public CiudadDAO getCiudadDAO() {
 		return new CiudadAzureSqlDAO(getConexion());
 	}
+	
+	/*public static void main(String[] args) {
+		try {
+			DAOFactory factory = DAOFactory.getFactory();
+
+			System.out.println("Iniciando transacción...");
+			factory.iniciarTransaccion();
+
+			System.out.println("Creando ciudad aleatoriamente");
+			DepartamentoEntity departamento = DepartamentoEntity.build()
+					.setId(UUIDHelper.convertToUUID("7827155D-0A6B-4D6E-9807-C5B7097D94F0"));
+			CiudadEntity ciudad = CiudadEntity.build().setId(UUIDHelper.generate())
+					.setNombre("Rionegro-" + UUIDHelper.generate()).setDepartamento(departamento);
+
+			factory.getCiudadDAO().crear(ciudad);
+
+			System.out.println("Consultamos ciudades: ");
+			var resultados = factory.getCiudadDAO().consultar(CiudadEntity.build());
+
+			for (CiudadEntity ciudadEntity : resultados) {
+				System.out.println("idCiudad: " + ciudadEntity.getId() + ", nombreCiudad: " + ciudadEntity.getNombre()
+						+ ", idDepartamento: " + ciudadEntity.getDepartamento().getId() + ", nombreDepartamento: "
+						+ ciudadEntity.getDepartamento().getNombre() + ", idPais: "
+						+ ciudadEntity.getDepartamento().getPais().getId() + ", nombrePais: "
+						+ ciudadEntity.getDepartamento().getPais().getNombre());
+			}
+
+			System.out.println("Confirmando transacción...");
+			factory.confirmarTransaccion();
+			System.out.println("Cerrando conexión...");
+			factory.cerrarConexion();
+		} catch (final Exception excepcion) {
+			excepcion.printStackTrace();
+		}
+	}*/
 }

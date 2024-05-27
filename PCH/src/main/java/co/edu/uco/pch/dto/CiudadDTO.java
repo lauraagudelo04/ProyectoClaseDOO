@@ -15,7 +15,7 @@ public final class CiudadDTO {
 		super();
 		setId(UUIDHelper.getDefault());
 		setNombre(TextHelper.EMPTY);
-		setDepartamento(departamento);
+		setDepartamento(departamento.build());
 	}
 	
 	public CiudadDTO(final UUID id, final String nombre, final DepartamentoDTO departamento) {
@@ -32,14 +32,14 @@ public final class CiudadDTO {
 		return id;
 	}
 	public final CiudadDTO setId(final UUID id) {
-		this.id = id;
+		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
 		return this;
 	}
 	public final String getNombre() {
 		return nombre;
 	}
 	public final CiudadDTO setNombre(final String nombre) {
-		this.nombre = nombre;
+		this.nombre = TextHelper.applyTrim(nombre);
 		return this;
 	}
 	public final DepartamentoDTO getDepartamento() {

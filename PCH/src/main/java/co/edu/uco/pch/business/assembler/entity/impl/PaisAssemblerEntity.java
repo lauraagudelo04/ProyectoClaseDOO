@@ -4,6 +4,7 @@ import java.util.List;
 
 import co.edu.uco.pch.business.assembler.entity.AssemblerEntity;
 import co.edu.uco.pch.business.domain.PaisDomain;
+import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.pch.entity.PaisEntity;
 
 public class PaisAssemblerEntity implements AssemblerEntity<PaisDomain, PaisEntity>{
@@ -20,15 +21,15 @@ public class PaisAssemblerEntity implements AssemblerEntity<PaisDomain, PaisEnti
 	}
 	
 	@Override
-	public PaisDomain toDomain(PaisEntity data) {
-		// TODO Auto-generated method stub
-		return null;
+	public PaisDomain toDomain(final PaisEntity data) {
+		var paisEntityTmp = ObjectHelper.getObjectHelper().getDefaultValue(data, PaisEntity.build());
+		return PaisDomain.build(paisEntityTmp.getId(), paisEntityTmp.getNombre());
 	}
 
 	@Override
-	public PaisEntity toEntity(PaisDomain domain) {
-		// TODO Auto-generated method stub
-		return null;
+	public PaisEntity toEntity(final PaisDomain domain) {
+		var paisDomainTmp = ObjectHelper.getObjectHelper().getDefaultValue(domain, PaisDomain.build());
+		return PaisEntity.build().setId(paisDomainTmp.getId()).setNombre(paisDomainTmp.getNombre());
 	}
 
 	@Override

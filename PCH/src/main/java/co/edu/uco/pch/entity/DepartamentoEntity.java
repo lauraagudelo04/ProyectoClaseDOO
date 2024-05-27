@@ -33,7 +33,7 @@ public final class DepartamentoEntity {
 	}
 
 	public final DepartamentoEntity setId(final UUID id) {
-		this.id = id;
+		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
 		return this;
 	}
 

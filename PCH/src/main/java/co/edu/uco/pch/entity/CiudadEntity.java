@@ -32,7 +32,7 @@ public final class CiudadEntity {
 	}
 
 	public final CiudadEntity setId(final UUID id) {
-		this.id = id;
+		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());;
 		return this;
 	}
 

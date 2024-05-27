@@ -7,6 +7,7 @@ import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.impl.MessageCatalog
 import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
 
 public final class MessageCatalogStrategy {
+	
 	private static final MessageCatalog base= new MessageCatalogBase();
 	private static final MessageCatalog externalService= new MessageCatalogBase();
 	
@@ -29,8 +30,8 @@ public final class MessageCatalogStrategy {
 	public static final Mensaje getMensaje(final CodigoMensaje codigo,
 			final String...parametros){
 		if (ObjectHelper.getObjectHelper().isNull(codigo)) {
-			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
-			var mensajeTecnico =  MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00001);
+			var mensajeUsuario = getContenidoMensaje(CodigoMensaje.M00002);
+			var mensajeTecnico = getContenidoMensaje(CodigoMensaje.M00001);
 			throw new CrossCuttingPCHException(mensajeTecnico, mensajeUsuario);
 		}
 		return getStrategy(codigo.isBase())

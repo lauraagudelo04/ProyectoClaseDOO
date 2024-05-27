@@ -11,9 +11,10 @@ public final class DepartamentoDTO {
 	private PaisDTO pais;
 	
 	public DepartamentoDTO() {
+		super();
 		setId(UUIDHelper.getDefault());
 		setNombre(TextHelper.EMPTY);
-		setPais(pais);
+		setPais(PaisDTO.build());
 		
 	}
 	public DepartamentoDTO(final UUID id, final String nombre, final PaisDTO pais) {
@@ -30,14 +31,14 @@ public final class DepartamentoDTO {
 		return id;
 	}
 	public final DepartamentoDTO setId(final UUID id) {
-		this.id = id;
+		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
 		return this;
 	}
 	public final String getNombre() {
 		return nombre;
 	}
 	public final DepartamentoDTO setNombre(final String nombre) {
-		this.nombre = nombre;
+		this.nombre = TextHelper.applyTrim(nombre);
 		return this;
 	}
 	public final PaisDTO getPais() {

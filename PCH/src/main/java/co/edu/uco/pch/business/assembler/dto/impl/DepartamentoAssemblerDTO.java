@@ -13,6 +13,15 @@ import co.edu.uco.pch.dto.PaisDTO;
 public class DepartamentoAssemblerDTO implements AssemblerDTO<DepartamentoDomain, DepartamentoDTO> {
 	private static final AssemblerDTO<PaisDomain, PaisDTO> paisAssembler = PaisAssemblerDTO.getInstance();
 	private static final AssemblerDTO<DepartamentoDomain, DepartamentoDTO> instance = new DepartamentoAssemblerDTO();
+	
+	private DepartamentoAssemblerDTO() {
+		super();
+	}
+	
+	public static final AssemblerDTO<DepartamentoDomain, DepartamentoDTO> getInstance() {
+		return instance;
+	}
+
 
 	@Override
 	public final DepartamentoDomain toDomain(final DepartamentoDTO data) {
@@ -22,11 +31,11 @@ public class DepartamentoAssemblerDTO implements AssemblerDTO<DepartamentoDomain
 	}
 
 	@Override
-	public final DepartamentoDTO toDTO(final DepartamentoDomain domain) {
+	public DepartamentoDTO toDTO(DepartamentoDomain domain) {
 		var departamentoDomainTmp = getObjectHelper().getDefaultValue(domain, DepartamentoDomain.build());
-		var paisDto = paisAssembler.toDTO(departamentoDomainTmp.getPais());
-		return DepartamentoDTO.build().setId(departamentoDomainTmp.getId())
-				.setNombre(departamentoDomainTmp.getNombre());
+		var paisDTO = paisAssembler.toDTO(departamentoDomainTmp.getPais());
+		return DepartamentoDTO.build().setId(departamentoDomainTmp.getId()).setNombre(departamentoDomainTmp.getNombre())
+				.setPais(paisDTO);
 	}
 
 	@Override

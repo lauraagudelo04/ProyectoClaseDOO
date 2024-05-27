@@ -107,12 +107,12 @@ public class MessageCatalogBase implements MessageCatalog {
 	}
 
 	@Override
-	public final String obtenerContendidoMensaje(final CodigoMensaje codigo, String... parametros) {
+	public final String obtenerContendidoMensaje(final CodigoMensaje codigo,final String... parametros) {
 		return obtenerMensaje(codigo, parametros).getContendio();
 	}
 
 	@Override
-	public final Mensaje obtenerMensaje(final CodigoMensaje codigo, String... parametros) {
+	public final Mensaje obtenerMensaje(final CodigoMensaje codigo,final String... parametros) {
 		if (ObjectHelper.getObjectHelper().isNull(codigo)) {
 			var mensajeUsuario=obtenerContendidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico=obtenerContendidoMensaje(CodigoMensaje.M00001);

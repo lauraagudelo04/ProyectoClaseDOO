@@ -14,7 +14,7 @@ public final class PaisDomain {
 		setNombre(nombre);
 	}
 	
-	public static final PaisDomain build (final UUID id, final String nombre) {
+	public static  PaisDomain build (final UUID id, final String nombre) {
 		return new PaisDomain(id, TextHelper.EMPTY);
 	}
 	
@@ -22,7 +22,7 @@ public final class PaisDomain {
         return new PaisDomain(UUIDHelper.getDefault(), TextHelper.EMPTY);
     }
 	
-	public static final  PaisDomain build (final UUID id) {
+	public static PaisDomain build (final UUID id) {
 		return new PaisDomain(id, TextHelper.EMPTY);
 	}
 	

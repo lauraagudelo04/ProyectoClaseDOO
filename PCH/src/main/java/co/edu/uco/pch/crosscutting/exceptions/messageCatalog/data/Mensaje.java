@@ -13,11 +13,11 @@ public class Mensaje {
 		return getCodigo().isBase();
 	}
 	
-	private final void setContenido(String contenido) {
+	private final void setContenido(final String contenido) {
 		this.contenido = contenido;
 	}
 	
-	private final void setCodigo(CodigoMensaje codigo) {
+	private final void setCodigo(final CodigoMensaje codigo) {
 		this.codigo = codigo;
 	}
 	

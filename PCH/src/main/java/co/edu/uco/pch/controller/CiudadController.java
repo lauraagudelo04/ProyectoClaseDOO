@@ -21,8 +21,9 @@ public final class CiudadController {
         return CiudadDTO.build();
     }
 
-    @GetMapping
+    @GetMapping("/p")
     public ResponseEntity<CiudadResponse> consultar(){
+    	
         var httpStatusCode = HttpStatus.ACCEPTED;
         var ciudadResponse = new CiudadResponse();
 
@@ -30,12 +31,12 @@ public final class CiudadController {
 
             var ciudadesDto = CiudadDTO.build();
             var facade = new ConsultarCiudadesFacade();
+            
             var ciudadesRetorno=new ArrayList<CiudadDTO>();
             ciudadesRetorno.add(CiudadDTO.build());
             ciudadesRetorno.add(CiudadDTO.build());
             ciudadesRetorno.add(CiudadDTO.build());
             ciudadesRetorno.add(CiudadDTO.build());
-
             ciudadResponse.setDatos(facade.execute(ciudadesDto));
             ciudadResponse.getMensajes().add("Ciudades consultadas exitosamente");
         }catch (final PCHException exception){
@@ -67,13 +68,14 @@ public final class CiudadController {
             ciudadResponse.getMensajes().add("Ciudades creada exitosamente");
         }catch (final PCHException exception){
             httpStatusCode = HttpStatus.BAD_REQUEST;
+            
             ciudadResponse.getMensajes().add(exception.getMensajeUsuario());
             exception.printStackTrace();
         }catch (final Exception exception){
             httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+            
             var mensajeUsuario = "Se ha presntado un problema tratando de registrar la nueva ciudad";
             ciudadResponse.getMensajes().add(mensajeUsuario);
-
             exception.printStackTrace();
 
         }

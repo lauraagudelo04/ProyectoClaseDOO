@@ -29,7 +29,7 @@ public final class PaisEntity {
 	}
 
 	public final PaisEntity setId(final UUID id) {
-		this.id = id;
+		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
 		return this;
 	}
 

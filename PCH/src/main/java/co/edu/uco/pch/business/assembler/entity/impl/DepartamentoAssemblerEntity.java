@@ -5,6 +5,7 @@ import java.util.List;
 import co.edu.uco.pch.business.assembler.entity.AssemblerEntity;
 import co.edu.uco.pch.business.domain.DepartamentoDomain;
 import co.edu.uco.pch.business.domain.PaisDomain;
+import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.pch.entity.DepartamentoEntity;
 import co.edu.uco.pch.entity.PaisEntity;
 
@@ -22,15 +23,18 @@ public class DepartamentoAssemblerEntity implements AssemblerEntity<Departamento
     }
 
 	@Override
-	public DepartamentoDomain toDomain(DepartamentoEntity data) {
-		// TODO Auto-generated method stub
-		return null;
+	public DepartamentoDomain toDomain(final DepartamentoEntity data) {
+		var departamentoEntityTmp = ObjectHelper.getObjectHelper().getDefaultValue(data, DepartamentoEntity.build());
+		var paisDomain = paisAssembler.toDomain(departamentoEntityTmp.getPais());
+		return DepartamentoDomain.build(departamentoEntityTmp.getId(), departamentoEntityTmp.getNombre(), paisDomain);
 	}
 
 	@Override
-	public DepartamentoEntity toEntity(DepartamentoDomain domain) {
-		// TODO Auto-generated method stub
-		return null;
+	public DepartamentoEntity toEntity(final DepartamentoDomain domain) {
+		var departamentoDomainTmp = ObjectHelper.getObjectHelper().getDefaultValue(domain, DepartamentoDomain.build());
+		var paisEntity = paisAssembler.toEntity(departamentoDomainTmp.getPais());
+		return DepartamentoEntity.build().setId(departamentoDomainTmp.getId())
+				.setNombre(departamentoDomainTmp.getNombre()).setPais(paisEntity);
 	}
 
 	@Override
