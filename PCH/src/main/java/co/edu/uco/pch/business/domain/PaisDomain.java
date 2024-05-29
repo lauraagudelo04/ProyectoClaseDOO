@@ -14,15 +14,15 @@ public final class PaisDomain {
 		setNombre(nombre);
 	}
 	
-	public static  PaisDomain build (final UUID id, final String nombre) {
+	public static  final PaisDomain build (final UUID id, final String nombre) {
 		return new PaisDomain(id, TextHelper.EMPTY);
 	}
 	
-	public static PaisDomain build(){
+	public static final PaisDomain build(){
         return new PaisDomain(UUIDHelper.getDefault(), TextHelper.EMPTY);
     }
 	
-	public static PaisDomain build (final UUID id) {
+	public static final PaisDomain build (final UUID id) {
 		return new PaisDomain(id, TextHelper.EMPTY);
 	}
 	

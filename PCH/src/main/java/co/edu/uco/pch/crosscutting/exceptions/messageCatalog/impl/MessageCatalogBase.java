@@ -1,6 +1,7 @@
 package co.edu.uco.pch.crosscutting.exceptions.messageCatalog.impl;
 
 import java.util.HashMap;
+
 import java.util.Map;
 import co.edu.uco.pch.crosscutting.exceptions.customs.CrossCuttingPCHException;
 import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.MessageCatalog;
@@ -8,6 +9,8 @@ import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.MessageCatalogStrat
 import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
 import co.edu.uco.pch.crosscutting.exceptions.messageCatalog.data.Mensaje;
 import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
+import co.edu.uco.pch.crosscutting.helpers.TextHelper;
+import co.edu.uco.pch.dto.CiudadDTO;
 
 public class MessageCatalogBase implements MessageCatalog {
 
@@ -124,7 +127,7 @@ public class MessageCatalogBase implements MessageCatalog {
 			throw new CrossCuttingPCHException(mensajeTecnico, mensajeUsuario);
 		}
 		if (!mensajes.containsKey(codigo.getIdentificador())) {
-			var mensajeUsuario=obtenerContendidoMensaje(CodigoMensaje.M00002);
+			var mensajeUsuario= obtenerContendidoMensaje(CodigoMensaje.M00002);
 			var mensajeTecnico=obtenerContendidoMensaje(CodigoMensaje.M00003, codigo.getIdentificador());
 			throw new CrossCuttingPCHException(mensajeTecnico, mensajeUsuario);
 		}
@@ -133,6 +136,8 @@ public class MessageCatalogBase implements MessageCatalog {
 		 del mensaje se retorne con los parametros reemplazados {1},{2},{3}*/
 		
 		return mensajes.get(codigo.getIdentificador());
+	
+		
 	}
 
 }
